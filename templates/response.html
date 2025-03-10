@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SMT Process Guide Submission Response</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .response {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 80%;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .header {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 100px;
+            margin-left: 20px;
+            display: block;
+            border: none;
+            background: transparent;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .header h2 {
+            margin: 0 auto;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .footer {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .success {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .info {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #f7dc6f;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .download-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/padget_logo.png') }}" alt="Padget Logo" class="logo">
+        <h2>SMT Process Guide Submission Response</h2>
+        <div style="width: 100px;"></div>
+    </div>
+    <div class="response">
+        <h2>Submission Details</h2>
+        <p class="info"><strong>Date:</strong> {{ Date }}</p>
+        <p class="info"><strong>Shift:</strong> {{ Shift }}</p>
+        <p class="info"><strong>Failure Time:</strong> {{ Failure_Time }}</p>
+        <p class="info"><strong>Failure Station:</strong> {{ Failure_Station }}</p>
+        <p class="info"><strong>PCBA Array:</strong> {{ PCBA_Array }}</p>
+        <p class="info"><strong>Serial Number:</strong> {{ Serial_Number }}</p>
+        <p class="info"><strong>Side:</strong> {{ Side }}</p>
+        <p class="info"><strong>SPI Date and Time:</strong> {{ SPI_Date_and_Time }}</p>
+        <p class="info"><strong>SPI Volume:</strong> {{ SPI_Volume }}</p>
+        <p class="info"><strong>SPI Height:</strong> {{ SPI_Height }}</p>
+        <p class="info"><strong>SPI Area:</strong> {{ SPI_Area }}</p>
+        <p class="info"><strong>Pre AOI Date and Time:</strong> {{ Pre_AOI_Date_and_Time }}</p>
+        <p class="info"><strong>Pre AOI Call:</strong> {{ Pre_AOI_Call }}</p>
+        <p class="info"><strong>Pre AOI Issue:</strong> {{ Pre_AOI_Issue }}</p>
+        <p class="info"><strong>Post AOI Date and Time:</strong> {{ Post_AOI_Date_and_Time }}</p>
+        <p class="info"><strong>Post AOI Call:</strong> {{ Post_AOI_Call }}</p>
+        <p class="info"><strong>Post AOI Issue:</strong> {{ Post_AOI_Issue }}</p>
+        <p class="info"><strong>Error Code:</strong> {{ Error_Code }}</p>
+        <p class="info"><strong>Failure Symptom:</strong> {{ Failure_Symptom }}</p>
+        <p class="info"><strong>Root Cause:</strong> {{ Root_Cause }}</p>
+        <p class="info"><strong>Corrective Action:</strong> {{ Corrective_Action }}</p>
+        <p class="info"><strong>Current Yield (%):</strong> {{ Current_Yield }}</p>
+        <p class="info"><strong>Improved Yield (%):</strong> {{ Improved_Yield }}</p>
+        <p class="info"><strong>FA Done By:</strong> {{ FA_Done_By }}</p>
+        <p class="info"><strong>X-Ray Image:</strong> {{ X_Ray_Image }}</p>
+        <p class="info"><strong>CT Scan Image:</strong> {{ CT_Scan_Image }}</p>
+        <p class="info"><strong>SPI Image:</strong> {{ SPI_Image }}</p>
+
+        <p class="success">Thank you for submitting the SMT Process Guide form!</p>
+        <p class="highlight">Your submission has been successfully recorded.</p>
+
+        <form action="/download_pdf" method="POST">
+            <input type="hidden" name="data_str" value="{{ data_str }}">
+            <button type="submit" class="download-button">Download PDF</button>
+        </form>
+
+        <form action="/download_excel" method="POST">
+            <input type="hidden" name="data_str" value="{{ data_str }}">
+            <button type="submit" class="download-button">Download Excel</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p>© 2023 SMT Process Guide</p>
+    </div>
+</body>
+</html>

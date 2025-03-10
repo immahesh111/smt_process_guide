@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SMT Process Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        fieldset {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 80%;
+            margin: auto;
+        }
+
+        legend {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .header {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 100px;
+            margin-left: 20px;
+            display: block;
+            border: none;
+            background: transparent;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .header h2 {
+            margin: 0 auto;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .footer {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 0 0 5px 5px;
+            clear: both;
+        }
+
+        form p {
+            margin-bottom: 15px;
+        }
+
+        form input[type="date"], form input[type="datetime-local"], form input[type="time"], 
+        form input[type="text"], form select {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        form input[type="file"] {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            height: 40px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .row {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .row:last-child {
+            border-bottom: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .required::after {
+            content: " *";
+            color: red;
+        }
+
+        .highlight {
+            background-color: #f7dc6f;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/padget_logo.png') }}" alt="Padget Logo" class="logo">
+        <h2><strong>SMT Process Guide</strong></h2>
+        <div style="width: 100px;"></div>
+    </div>
+    <form method="POST" action="/submit" enctype="multipart/form-data">
+        <fieldset>
+            <div class="row">
+                <p class="required">Date: <input type="date" id="date" name="date" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Shift:
+                    <select id="shift" name="shift" class="disabled" required>
+                        <option value="">Select Shift</option>
+                        <option value="Day">Day</option>
+                        <option value="Night">Night</option>
+                    </select>
+                </p>
+            </div>
+            <div class="row">
+                <p class="required">Failure Time: <input type="time" id="failureTime" name="failureTime" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Failure Station: <input type="text" id="failureStation" name="failureStation" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">PCBA Array:
+                    <select id="pcbaArray" name="pcbaArray" class="disabled" required>
+                        <option value="">Select Array</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </p>
+            </div>
+            <div class="row">
+                <p class="required">Serial Number: <input type="text" id="serialNumber" name="serialNumber" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Side:
+                    <select id="side" name="side" class="disabled" required>
+                        <option value="">Select Side</option>
+                        <option value="Bot">Bottom</option>
+                        <option value="Top">Top</option>
+                    </select>
+                </p>
+            </div>
+            <div class="row">
+                <p class="required">SPI Date and Time: <input type="datetime-local" id="spiDateTime" name="spiDateTime" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">SPI Volume: <input type="text" id="spiVolume" name="spiVolume" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">SPI Height: <input type="text" id="spiHeight" name="spiHeight" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">SPI Area: <input type="text" id="spiArea" name="spiArea" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p>SPI Image: <input type="file" id="spiImage" name="spiImage" class="disabled"></p>
+            </div>
+            <div class="row">
+                <p class="required">Pre AOI Date and Time: <input type="datetime-local" id="preAoiDateTime" name="preAoiDateTime" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Pre AOI Call:
+                    <select id="preAoiCall" name="preAoiCall" class="disabled" required>
+                        <option value="">Select Type</option>
+                        <option value="False Call">False Call</option>
+                        <option value="Real Call">Real Call</option>
+                    </select>
+                </p>
+            </div>
+            <div class="row">
+                <p class="required">Pre AOI Issue: <input type="text" id="preAoiIssue" name="preAoiIssue" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Post AOI Date and Time: <input type="datetime-local" id="postAoiDateTime" name="postAoiDateTime" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Post AOI Call:
+                    <select id="postAoiCall" name="postAoiCall" class="disabled" required>
+                        <option value="">Select Type</option>
+                        <option value="False Call">False Call</option>
+                        <option value="Real Call">Real Call</option>
+                    </select>
+                </p>
+            </div>
+            <div class="row">
+                <p class="required">Post AOI Issue: <input type="text" id="postAoiIssue" name="postAoiIssue" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Error Code: <input type="text" id="errorCode" name="errorCode" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Process Symptom: <input type="text" id="failureSymptom" name="failureSymptom" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Root Cause: <input type="text" id="rootCause" name="rootCause" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p class="required">Corrective Action: <input type="text" id="correctiveAction" name="correctiveAction" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p>X-Ray Image: <input type="file" id="xrayImage" name="xrayImage" class="disabled"></p>
+            </div>
+            <div class="row">
+                <p>CT Scan Image: <input type="file" id="ctScanImage" name="ctScanImage" class="disabled"></p>
+            </div>
+            <div class="row">
+                <p class="required">Current Yield (%): <input type="text" id="currentYield" name="currentYield" class="disabled" required pattern="^(100|[1-9]?[0-9](?:\.[0-9]{1,2})?)$" title="Enter a value between 0 and 100 with up to 2 decimal places"></p>
+            </div>
+            <div class="row">
+                <p class="required">Improved Yield (%): <input type="text" id="improvedYield" name="improvedYield" class="disabled" required pattern="^(100|[1-9]?[0-9](?:\.[0-9]{1,2})?)$" title="Enter a value between 0 and 100 with up to 2 decimal places"></p>
+            </div>
+            <div class="row">
+                <p class="required">FA Done By: <input type="text" id="faDoneBy" name="faDoneBy" class="disabled" required></p>
+            </div>
+            <div class="row">
+                <p><input type="submit" value="Submit"></p>
+            </div>
+            <div class="row">
+                <p class="highlight">Please fill out all fields carefully.</p>
+            </div>
+        </fieldset>
+    </form>
+    <div class="footer">
+        <p>© 2023 SMT Process Guide</p>
+    </div>
+    <script>
+        const fields = [
+            'date', 'shift', 'failureTime', 'failureStation', 'pcbaArray', 'serialNumber', 'side',
+            'spiDateTime', 'spiVolume', 'spiHeight', 'spiArea', 'spiImage', 'preAoiDateTime', 
+            'preAoiCall', 'preAoiIssue', 'postAoiDateTime', 'postAoiCall', 'postAoiIssue', 
+            'errorCode', 'failureSymptom', 'rootCause', 'correctiveAction', 'xrayImage', 
+            'ctScanImage', 'currentYield', 'improvedYield', 'faDoneBy'
+        ];
+
+        fields.forEach((field, index) => {
+            const inputField = document.getElementById(field);
+            inputField.addEventListener('input', function() {
+                if (this.value !== '') {
+                    if (index < fields.length - 1) {
+                        document.getElementById(fields[index + 1]).classList.remove('disabled');
+                    }
+                } else {
+                    for (let i = index + 1; i < fields.length; i++) {
+                        document.getElementById(fields[i]).classList.add('disabled');
+                    }
+                }
+            });
+        });
+
+        for (let i = 1; i < fields.length; i++) {
+            document.getElementById(fields[i]).classList.add('disabled');
+        }
+    </script>
+</body>
+</html>
